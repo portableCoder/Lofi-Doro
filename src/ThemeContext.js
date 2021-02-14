@@ -9,10 +9,10 @@ const ThemeProvider = ({ children }) => {
     timerColor: "#B9253A",
   };
   const lightTheme = {
-    primaryColor: "#556EE6",
-    secondaryColor: "#778BEB",
+    primaryColor: "#C00D0D",
+    secondaryColor: "#FCF6F5FF",
     textColor: "white",
-    timerColor: "#D13148",
+    timerColor: "white",
   };
   const [theme, setTheme] = useState("dark");
   return (

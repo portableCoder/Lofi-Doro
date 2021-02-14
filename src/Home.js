@@ -262,9 +262,7 @@ export default function Home() {
                   }}
                   className="input is-small"
                 ></input>
-                <br></br>
-                Timer
-                <br></br> duration{" "}
+                Timer duration (mins)
               </label>
             </span>
             <span className="pt-1" style={{ float: "left" }}>
@@ -282,8 +280,11 @@ export default function Home() {
                   className="input is-small"
                   placeholder="Small input"
                   value={5}
+                  onChange={(e) => {
+                    setBreakDuration(e.target.value * 60);
+                  }}
                 ></input>
-                Break interval{" "}
+                Break interval (mins)
               </label>
             </span>
           </div>
