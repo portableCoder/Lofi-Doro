@@ -1,44 +1,51 @@
 import { motion } from "framer-motion";
 import React from "react";
-
-export default function Modal({ open, children, title, handleClose, theme }) {
+import { Theme } from "./ThemeContext";
+interface ModalProps {
+  open: boolean,
+  children?: any,
+  title: string,
+  handleClose: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement> | undefined,
+  theme: Theme
+}
+export default function Modal({ open, children, title, handleClose, theme }: ModalProps) {
   const { primaryColor, secondaryColor, textColor } = theme;
   return (
     <div>
-      <div class={`modal ${open ? "is-active" : ""}`}>
+      <div className={`modal ${open ? "is-active" : ""}`}>
         <div
           style={{
             color: textColor,
             opacity: "0.7",
           }}
           onClick={handleClose}
-          class="modal-background"
+          className="modal-background"
         ></div>
         <div
           style={{
             color: textColor,
             border: `1px solid ${textColor}`,
           }}
-          class="modal-card"
+          className="modal-card"
         >
           <header
             style={{
               background: primaryColor,
               color: textColor,
             }}
-            class="modal-card-head"
+            className="modal-card-head"
           >
             <p
               style={{
                 color: textColor,
               }}
-              class="modal-card-title"
+              className="modal-card-title"
             >
               {title}
             </p>
             <button
               onClick={handleClose}
-              class="delete"
+              className="delete"
               aria-label="close"
             ></button>
           </header>
@@ -48,18 +55,18 @@ export default function Modal({ open, children, title, handleClose, theme }) {
 
               background: secondaryColor,
             }}
-            class="modal-card-body"
+            className="modal-card-body"
           >
             {children}
           </section>
-          <footer style={{ background: primaryColor }} class="modal-card-foot">
+          <footer style={{ background: primaryColor }} className="modal-card-foot">
             <button
               style={{
                 color: textColor,
 
                 background: secondaryColor,
               }}
-              class="button"
+              className="button"
             >
               Enter
             </button>

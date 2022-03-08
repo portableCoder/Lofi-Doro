@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./Switch.css";
-export default function Switch({ onChange }) {
+interface SwitchProps {
+  onChange: React.ChangeEventHandler<HTMLInputElement>
+}
+export default function Switch({ onChange }: SwitchProps) {
   return (
     <div>
       <label className="switch is-size-5-desktop is-size-6-mobile">

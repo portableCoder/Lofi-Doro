@@ -1,6 +1,8 @@
 import React from "react";
-
-export default function SpotifyPlayer({ playlist }) {
+interface SpotifyPlayerProps {
+  playlist: string
+}
+export default function SpotifyPlayer({ playlist }: SpotifyPlayerProps) {
   let thisPlaylist = playlist;
 
   thisPlaylist = thisPlaylist.replace(".com/", ".com/embed/");
@@ -11,7 +13,7 @@ export default function SpotifyPlayer({ playlist }) {
       width="300"
       height="80"
       frameBorder="0"
-      allowtransparency="true"
+      allowTransparency={true}
       allow="encrypted-media"
     ></iframe>
   );
