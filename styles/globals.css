@@ -1,16 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+text {
+  transform-box: fill-box;
+  transform-origin: center;
+}
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
+  overflow: hidden;
 }

@@ -1,0 +1,13 @@
+        <svg xmlns="http://www.w3.org/2000/svg" className='relative  transform  -translate-x-8' width={450} height={450}>
+
+          <linearGradient gradientTransform="rotate(12)" id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="10%" stop-color="#2AFADF" />
+            <stop offset="100%" stop-color="#4C83FF" />
+          </linearGradient>
+          <circle stroke="url(#gradient)" transform={"rotate(90)"} strokeDasharray={dArray} strokeDashoffset={dArray - percentage(100, dArray)} cx="250" cy="250" r={r} fill="transparent" strokeLinecap="round" stroke-width="16" />
+          <text x={isMobile ? "65%" : "55%"} y="49%" textAnchor='middle' alignmentBaseline='central' fontSize={'3.4rem'} className='text-white stroke-white fill-white'>
+
+            00:00
+          </text>
+
+        </svg>

@@ -1,0 +1,32 @@
+<svg id="visual" className='absolute top-0 left-0 -z-50' viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><rect x="0" y="0" width="900" height="600"
+    fill="#101010"></rect>
+
+<defs>
+    <linearGradient id="grad1_0" x1="33.3%" y1="0%" x2="100%" y2="100%">
+        <stop offset="20%" stop-color="#101010" stop-opacity="1"></stop>
+        <stop offset="80%" stop-color="#101010" stop-opacity="1"></stop>
+    </linearGradient></defs>
+
+
+<defs>
+    <linearGradient id="grad2_0" x1="0%" y1="0%" x2="66.7%" y2="100%">
+        <stop offset="20%" stop-color="#101010" stop-opacity="1">
+        </stop><stop offset="80%" stop-color="#101010" stop-opacity="1"></stop></linearGradient>
+
+</defs>
+
+<defs>
+
+    <linearGradient gradientTransform="rotate(0)" id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="10%" stop-color=" #F55555" />
+        <stop offset="100%" stop-color="#FD6E6A " />
+    </linearGradient>
+
+</defs>
+<g transform={"translate(900, 0)"}>
+    <path d="M0 243.4C-36.5 226.9 -73 210.5 -111 192.3C-149 174 -188.5 154 -210.8 121.7C-233.1 89.3 -238.2 44.7 -243.4 0L0 0Z" fill={"url(#gradient)"}></path></g><g transform="translate(0, 600)"><path d="M0 -243.4C39.2 -231.5 78.3 -219.7 116 -200.9C153.7 -182.1 189.8 -156.3 210.8 -121.7C231.7 -87 237.6 -43.5 243.4 0L0 0Z" fill={"url(#gradient)"}>
+
+    </path>
+</g>
+</svg>
