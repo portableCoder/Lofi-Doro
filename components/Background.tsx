@@ -7,9 +7,9 @@ const Background = () => {
     const isMobile = useIsMobile()
     return (
         <>
-            <svg id="visual" transform={`scale(${isMobile ? 1.4 : 1})`} className="fixed top-0 left-0 -z-50" viewBox={`0 0 ${width} ${height}`} width={width} height={height} xmlns=" http://www.w3.org/2000/svg"
+            <svg id="visual" transform={`scale(${isMobile ? 1.4 : 1})`} className="" viewBox={`0 0 ${width} ${height}`} width={width} height={height} xmlns=" http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"><rect x="0" y="0" width={width} height={height}
-                    fill="#101010"></rect>
+                    fillOpacity="0" fill="#101010"></rect>
 
                 <defs>
                     <linearGradient id="grad1_0" x1="33.3%" y1="0%" x2="100%" y2="100%">

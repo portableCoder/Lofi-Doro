@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BsFillPauseFill, BsFillPlayFill, BsStopFill } from 'react-icons/bs'
 import { AiOutlineUndo } from 'react-icons/ai'
 import convertToHMS from '../util/convertToHMS';
+import useLocalStorage from '../util/useLocalStorage';
 const isNumber = function (str: string) {
 
     const pattern = /^\d+$/;
@@ -27,13 +28,11 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
     const [hr, min, sec] = convertToHMS(time)
     const [th, tm, ts] = convertToHMS(timerDuration)
     const [timerDurationTime, setTimerDurationTime] = useState({
-        hrs: Number(th) < 10 ? th.replace('0', '') : th,
-        mins: Number(tm) < 10 ? th.replace('0', '') : tm,
-        sec: Number(ts) < 10 ? th.replace('0', '') : ts
+        hrs: th,
+        mins: tm,
+        sec: ts
     })
-    useEffect(() => {
-        console.log(convertToHMS(timerDuration))
-    }, [timerDuration])
+
     const filterUnwantedChars = (e: React.FormEvent<HTMLInputElement>) => {
 
         let currentVal = e.currentTarget.value
@@ -49,9 +48,7 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
 
 
     useEffect(() => {
-        console.log('abcd')
         if (onTimerChange) {
-            console.log('abcd2')
 
             let { hrs, mins, sec } = timerDurationTime
             onTimerChange(Number(hrs), Number(mins), Number(sec))
@@ -61,8 +58,8 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
         <>
             <button onClick={onClickPlay} className='text-2xl'> {!paused ? <BsFillPauseFill /> : <BsFillPlayFill />}</button>
 
-            <div className='w-full flex justify-center items-center'>
-                <div>Break Duration:</div>
+            <div className='w-full flex justify-center items-center font-bold text-xl'>
+                <div className=''>Break Duration:</div>
 
                 <div className='w-12  '>
                     <input disabled={!paused} onChange={(e) => {
@@ -82,7 +79,7 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
             {
                 isBreak &&
                 <div className=' text-2xl md:text-4xl text-red-400'>
-                    It's Break Time!
+                    {`It's Break Time!`}
                 </div>
             }
             {
@@ -91,7 +88,7 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                     Set your timer duration..
                 </div>
             }
-            <div className='w-full flex  justify-center gap-x-4 md:gap-x-16 items-center text-xl md:text-4xl '>
+            <div className={'w-full flex  justify-center gap-x-4 md:gap-x-16 items-center text-xl md:text-4xl '}>
                 <div className='text-6xl md:text-8xl text-red-500'>[</div>
                 <div className='flex justify-center items-center flex-col my-6'>
                     <div className='w-16 text-center '>
