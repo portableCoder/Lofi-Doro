@@ -14,7 +14,7 @@ import Image from 'next/image'
 import parseYoutubeLink from '../util/parseYoutubeLink'
 
 
-const Home: NextPage = () => {
+const Home = () => {
   const { width, height } = useWindowSize()
 
   const isMobile = useIsMobile()

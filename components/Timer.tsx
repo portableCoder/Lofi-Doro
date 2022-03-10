@@ -56,7 +56,7 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
     }, [timerDurationTime])
     return (
         <>
-            <button onClick={onClickPlay} className='text-2xl'> {!paused ? <BsFillPauseFill /> : <BsFillPlayFill />}</button>
+            <button id='play-button' onClick={onClickPlay} className='text-2xl'> {!paused ? <BsFillPauseFill /> : <BsFillPlayFill />}</button>
 
             <div className='w-full flex justify-center items-center font-bold text-xl'>
                 <div className=''>Break Duration:</div>
@@ -92,11 +92,11 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                 <div className='text-6xl md:text-8xl text-red-500'>[</div>
                 <div className='flex justify-center items-center flex-col my-6'>
                     <div className='w-16 text-center '>
-                        {play && <div className='text-center w-full'>
+                        {play && <div id="hr-display" className='text-center w-full'>
                             {hr}
                         </div>}
                         {!play &&
-                            <input onChange={(e) => {
+                            <input id="hr" onChange={(e) => {
                                 let val = e.target.value
                                 if (val === '') {
                                     setTimerDurationTime((prev) => ({ ...prev, hrs: val }))
@@ -115,12 +115,12 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                 <div>:</div>
                 <div className='flex justify-center items-center flex-col'>
                     <div className='w-16  '>
-                        {play && <div className='text-center w-full'>
+                        {play && <div id="min-display" className='text-center w-full'>
                             {min}
                         </div>}
                         {!play &&
 
-                            <input onChange={(e) => {
+                            <input id="min" onChange={(e) => {
                                 let val = e.target.value
                                 if (val === '') {
                                     setTimerDurationTime((prev) => ({ ...prev, mins: val }))
@@ -140,12 +140,12 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                 <div>:</div>
                 <div className='flex justify-center items-center flex-col'>
                     <div className='w-16  '>
-                        {play && <div className='text-center w-full'>
+                        {play && <div id="sec-display" className='text-center w-full'>
                             {sec}
                         </div>}
                         {
                             !play &&
-                            <input onChange={(e) => {
+                            <input id="sec" onChange={(e) => {
                                 let val = e.target.value
                                 if (val === '') {
                                     setTimerDurationTime((prev) => ({ ...prev, sec: val }))
