@@ -1,13 +1,17 @@
+import { animated, useSpring } from '@react-spring/web'
 import React from 'react'
 import useIsMobile from '../util/useIsMobile'
 import useWindowSize from '../util/useWindowSize'
 
-const Background = () => {
+const Background = ({ scale }: { scale: number }) => {
     const { width, height } = useWindowSize()
     const isMobile = useIsMobile()
+    const scaleSpring = useSpring({
+        scale: isMobile ? 1.4 + scale : 1 + scale
+    })
     return (
         <>
-            <svg id="visual" transform={`scale(${isMobile ? 1.4 : 1})`} className="" viewBox={`0 0 ${width} ${height}`} width={width} height={height} xmlns=" http://www.w3.org/2000/svg"
+            <animated.svg id="visual" style={scaleSpring} className="" viewBox={`0 0 ${width} ${height}`} width={width} height={height} xmlns=" http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"><rect x="0" y="0" width={width} height={height}
                     fillOpacity="0" fill="#101010"></rect>
 
@@ -29,7 +33,7 @@ const Background = () => {
 
                     <linearGradient gradientTransform="rotate(0)" id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="10%" stopColor=" #F55555" />
-                        <stop offset="100%" stopColor="#FD6E6A " />
+                        <stop offset="100%" stopColor="#FD6E5B " />
                     </linearGradient>
 
                 </defs>
@@ -38,7 +42,7 @@ const Background = () => {
 
                     </path>
                 </g>
-            </svg>
+            </animated.svg>
         </>
     )
 }

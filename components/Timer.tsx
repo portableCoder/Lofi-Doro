@@ -3,6 +3,8 @@ import { BsFillPauseFill, BsFillPlayFill, BsStopFill } from 'react-icons/bs'
 import { AiOutlineUndo } from 'react-icons/ai'
 import convertToHMS from '../util/convertToHMS';
 import useLocalStorage from '../util/useLocalStorage';
+import { animated, useSpring } from '@react-spring/web'
+import usePrevious from '../util/usePrevious';
 const isNumber = function (str: string) {
 
     const pattern = /^\d+$/;
@@ -23,8 +25,19 @@ interface TimerProps {
     onTimerChange?: (hr: number | string, min: number | string, sec: number | string) => void;
 
 }
-
+let from = {
+    y: -25
+}
+let enter = {
+    y: 0
+}
+let leave = {
+    y: 25,
+    opacity: 0,
+    position: 'absolute'
+}
 const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onClickPlay, onClickStop, onBreakChange, onTimerChange }: TimerType & TimerProps) => {
+    const prevTime = usePrevious(convertToHMS(time))
     const [hr, min, sec] = convertToHMS(time)
     const [th, tm, ts] = convertToHMS(timerDuration)
     const [timerDurationTime, setTimerDurationTime] = useState({
@@ -54,6 +67,15 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
             onTimerChange(Number(hrs), Number(mins), Number(sec))
         }
     }, [timerDurationTime])
+    useEffect(() => {
+
+
+    }, [time])
+    const breakIndicatorStyles = useSpring({
+        y: isBreak ? 0 : 25
+    })
+
+
     return (
         <>
             <button id='play-button' onClick={onClickPlay} className='text-2xl'> {!paused ? <BsFillPauseFill /> : <BsFillPlayFill />}</button>
@@ -78,9 +100,9 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
 
             {
                 isBreak &&
-                <div className=' text-2xl md:text-4xl text-red-400'>
+                <animated.div style={breakIndicatorStyles} className=' text-2xl md:text-4xl text-red-400'>
                     {`It's Break Time!`}
-                </div>
+                </animated.div>
             }
             {
                 !play &&
@@ -92,7 +114,7 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                 <div className='text-6xl md:text-8xl text-red-500'>[</div>
                 <div className='flex justify-center items-center flex-col my-6'>
                     <div className='w-16 text-center '>
-                        {play && <div id="hr-display" className='text-center w-full'>
+                        {play && <div id="hr-display" className='text-center w-full flex items-center justify-center'>
                             {hr}
                         </div>}
                         {!play &&
@@ -140,7 +162,7 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                 <div>:</div>
                 <div className='flex justify-center items-center flex-col'>
                     <div className='w-16  '>
-                        {play && <div id="sec-display" className='text-center w-full'>
+                        {play && <div id="sec-display" className='text-center w-full flex items-center justify-center'>
                             {sec}
                         </div>}
                         {
