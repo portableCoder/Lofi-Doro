@@ -4,7 +4,6 @@ export default function useIsMobile() {
     const [isMobile, setIsMobile] = useState(false)
 
     function handleWindowSizeChange() {
-        console.log('resize')
         setIsMobile(window.innerWidth < 720)
 
     }

@@ -15,7 +15,6 @@ export default function useWindowSize() {
             setWindowSize({
                 width, height
             });
-            console.log(width, height, "width-height")
         }
         // Add event listener
         window.addEventListener("resize", handleResize);
