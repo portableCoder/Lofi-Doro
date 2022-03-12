@@ -7,13 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
+    "test": "jest",
     "prettier-lint": "prettier --write .",
     "cy-chrome": "cypress run --browser chrome",
     "cy-firefox": "cypress run --browser firefox",
     "cypress:open": "cypress open",
     "export": "next build && next export",
-    "deploy": "yarn export && gh-pages -d out"
+    "predeploy": "yarn export",
+    "deploy": "gh-pages -d out"
   },
   "husky": {
     "hooks": {

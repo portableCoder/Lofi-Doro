@@ -128,7 +128,6 @@ const Home: NextPage = () => {
   }, [timerState])
   useEffect(() => {
     const { breakDuration, timerDuration } = timerState
-    console.log(breakDuration, timerDuration)
     setState({
       link,
       timerState: {
@@ -209,7 +208,6 @@ const Home: NextPage = () => {
             </div>
             <div className='h-full  flex flex-col gap-y-4 justify-center items-center -my-24'>
               <Timer onTimerChange={(hr, min, sec) => {
-                console.log('called..')
                 if (hr === '' || min === '' || sec === '') {
                   return
                 }

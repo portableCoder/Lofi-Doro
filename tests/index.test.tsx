@@ -4,12 +4,18 @@ import Home from '../pages/index'
 import { act } from 'react-dom/test-utils'
 jest.setTimeout(10000)
 describe('Home', () => {
+    //@ts-ignore
+    window.Notification = null
     let min = document.getElementById('min') as HTMLInputElement
     let sec = document.getElementById('sec') as HTMLInputElement
     let hr = document.getElementById('hr') as HTMLInputElement
     let hrDisplay = document.getElementById('hr-display') as HTMLDivElement
     let minDisplay = document.getElementById('min-display') as HTMLDivElement
     let secDisplay = document.getElementById('sec-display') as HTMLDivElement
+    let Notification;
+    beforeAll(() => {
+        Notification = null
+    })
     beforeEach(() => {
 
         render(<Home />)

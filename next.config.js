@@ -9,8 +9,8 @@ const nextConfig = {
     path: '',
   },
 
-  // basePath: '/Lofi-Doro',
-  // assetPrefix: '/Lofi-Doro'
+  basePath: '/Lofi-Doro',
+  assetPrefix: '/Lofi-Doro'
 }
 
 module.exports = nextConfig
