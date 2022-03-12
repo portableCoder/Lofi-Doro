@@ -1,4 +1,4 @@
-import { TimerType } from "../components/Timer"
+import { TimerType } from "../types/Timer"
 
 type TimerAction = {
     payload: boolean | number,

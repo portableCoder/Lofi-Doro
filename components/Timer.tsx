@@ -1,40 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { BsFillPauseFill, BsFillPlayFill, BsStopFill } from 'react-icons/bs'
+import React, { useEffect, useState } from 'react'
+import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs'
 import { AiOutlineUndo } from 'react-icons/ai'
 import convertToHMS from '../util/convertToHMS';
 import { animated, useSpring } from '@react-spring/web'
-import usePrevious from '../util/usePrevious';
+import { usePrevious } from '../hooks';
+import { TimerProps, TimerType } from '../types/Timer';
 const isNumber = function (str: string) {
 
     const pattern = /^\d+$/;
     return pattern.test(str);  // returns a boolean
 }
-export interface TimerType {
-    time: number;
-    play: boolean;
-    isBreak: boolean;
-    breakDuration: number;
-    paused: boolean;
-    timerDuration: number
-}
-interface TimerProps {
-    onClickPlay?: React.MouseEventHandler<HTMLButtonElement>
-    onClickStop?: React.MouseEventHandler<HTMLButtonElement>
-    onBreakChange?: React.ChangeEventHandler<HTMLInputElement>;
-    onTimerChange?: (hr: number | string, min: number | string, sec: number | string) => void;
 
-}
-let from = {
-    y: -25
-}
-let enter = {
-    y: 0
-}
-let leave = {
-    y: 25,
-    opacity: 0,
-    position: 'absolute'
-}
+
 const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onClickPlay, onClickStop, onBreakChange, onTimerChange }: TimerType & TimerProps) => {
     const prevTime = usePrevious(convertToHMS(time))
     const [hr, min, sec] = convertToHMS(time)

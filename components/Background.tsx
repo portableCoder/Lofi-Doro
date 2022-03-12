@@ -1,7 +1,6 @@
 import { animated, useSpring } from '@react-spring/web'
 import React from 'react'
-import useIsMobile from '../util/useIsMobile'
-import useWindowSize from '../util/useWindowSize'
+import { useWindowSize, useIsMobile } from '../hooks'
 
 const Background = ({ scale }: { scale: number }) => {
     const { width, height } = useWindowSize()

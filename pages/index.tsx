@@ -1,119 +1,22 @@
 import type { NextPage } from 'next'
-import React, { useEffect, useReducer, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Timer from '../components/Timer'
-import useInterval from '../util/useInterval'
 import Background from '../components/Background'
-import reducer from '../util/TimerReducer'
 import YouTube from 'react-youtube'
 import { BsMusicNoteBeamed, BsX } from 'react-icons/bs'
-import useLocalStorage from '../util/useLocalStorage'
-import useWindowSize from '../util/useWindowSize'
 import Image from 'next/image'
-import parseYoutubeLink from '../util/parseYoutubeLink'
 import SEOHead from '../components/SEOHead'
+import { useWindowSize } from '../hooks'
+import parseYoutubeLink from '../util/parseYoutubeLink'
+import useTimer from '../hooks/useTimer'
 const Home: NextPage = () => {
   const { width, height } = useWindowSize()
-  const [frozenState, setState] = useLocalStorage('state', {
-    timerState: {
+  const { timerState, link, setLink, resetTimer, setTimerDuration, setPlay, setPaused } = useTimer()
 
-      breakDuration: 5 * 60,
-      timerDuration: 10 * 60
-    },
-    link: `https://www.youtube.com/watch?v=tgI6PjEq0O8`
-  })
-  const [timerState, dispatchTimerState] = useReducer(reducer, {
-    time: 0,
-    isBreak: false,
-    play: false,
-    breakDuration: frozenState.timerState.breakDuration,
-    paused: true,
-    timerDuration: frozenState.timerState.timerDuration
-
-  })
-  useInterval(() => {
-    let currentTime = timerState.time + 1
-    if (currentTime === timerState.timerDuration && !timerState.isBreak) {
-      dispatchTimerState({
-        payload: 0,
-        type: "changetimer"
-      })
-      dispatchTimerState({
-        payload: true,
-        type: "setbreak"
-      })
-      if (grantedPerms) {
-        const notification = new Notification("It's break time");
-      }
-    } else if (timerState.isBreak) {
-      if (currentTime === timerState.breakDuration) {
-        dispatchTimerState({
-          payload: false,
-          type: "setbreak"
-        })
-        dispatchTimerState({
-          payload: 0,
-          type: "changetimer"
-        })
-      } else {
-        dispatchTimerState({
-          payload: currentTime,
-          type: "changetimer"
-        })
-      }
-    } else {
-      dispatchTimerState({
-        payload: currentTime,
-        type: "changetimer"
-      })
-    }
-  }, !timerState.paused ? 1000 : 100000000000)
-  const resetTimer = () => {
-    dispatchTimerState({
-      payload: false,
-      type: "setplay"
-    })
-    dispatchTimerState({
-      payload: false,
-      type: "setbreak"
-    })
-    dispatchTimerState({
-      payload: 0,
-      type: "changetimer"
-    })
-    dispatchTimerState({
-      payload: timerState.breakDuration,
-      type: "changebreak"
-    })
-    dispatchTimerState({
-      payload: timerState.timerDuration,
-      type: "settimerduration"
-    })
-    dispatchTimerState({
-      payload: true,
-      type: "setpaused"
-    })
-  }
   const player = useRef<any>(null)
-  const [showPlayer, setShowPlayer] = useState(false)
-  const [link, setLink] = useState(frozenState.link)
-  const parsedLink = parseYoutubeLink(link)
-  const [grantedPerms, setGrantedPerms] = useState(false)
-  useEffect(() => {
-    if (Notification) {
-      if (Notification.permission !== "granted") {
-        // If it's okay let's create a notification
 
-        Notification.requestPermission().then(function (permission) {
-          // If the user accepts, let's create a notification
-          if (permission === "granted") {
-            setGrantedPerms(true)
-          }
-        });
-      } else if (Notification.permission === "granted") {
-        setGrantedPerms(true)
-      }
-    }
-  }, [])
+  const [showPlayer, setShowPlayer] = useState(false)
+
   useEffect(() => {
 
     if (player.current) {
@@ -126,16 +29,8 @@ const Home: NextPage = () => {
       }
     }
   }, [timerState])
-  useEffect(() => {
-    const { breakDuration, timerDuration } = timerState
-    setState({
-      link,
-      timerState: {
-        breakDuration,
-        timerDuration
-      }
-    })
-  }, [timerState, link])
+  const parsedLink = parseYoutubeLink(link)
+
   return (
     <>
       <SEOHead />
@@ -219,31 +114,18 @@ const Home: NextPage = () => {
 
                 let time = hr * 3600 + min * 60 + sec
 
-                dispatchTimerState({
-                  payload: time,
-                  type: "settimerduration"
-                })
-
+                setTimerDuration(time)
               }} onBreakChange={(e) => {
 
-                dispatchTimerState({
-                  payload: Number(e.target.value) * 60,
-                  type: "changebreak"
-                })
+                setTimerDuration(Number(e.target.value))
+
               }} onClickStop={resetTimer} onClickPlay={() => {
                 if (!timerState.paused === false && player.current) {
                   player.current.target.playVideo()
                 }
                 if (!timerState.play)
-                  dispatchTimerState({
-                    payload: true,
-                    type: "setplay"
-                  })
-                dispatchTimerState({
-                  payload: !timerState.paused,
-                  type: "setpaused"
-                })
-
+                  setPlay(true)
+                setPaused(!timerState.paused)
               }} {...timerState} />
 
             </div>
