@@ -13,14 +13,14 @@
     "cy-firefox": "cypress run --browser firefox",
     "cypress:open": "cypress open",
     "export": "next build && next export",
-    "deploy": "gh-pages -d out"
+    "deploy": "yarn export && gh-pages -d out"
   },
   "husky": {
     "hooks": {
       "applypatch-msg": "[Husky] patch",
       "pre-applypatch": "[Husky] starting patch",
       "post-applypatch": "[Husky] patch done",
-      "pre-commit": "npx lint-staged"
+      "pre-commit": "prettier-lint"
     }
   },
   "lint-staged": {

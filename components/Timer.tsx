@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BsFillPauseFill, BsFillPlayFill, BsStopFill } from 'react-icons/bs'
 import { AiOutlineUndo } from 'react-icons/ai'
 import convertToHMS from '../util/convertToHMS';
-import useLocalStorage from '../util/useLocalStorage';
 import { animated, useSpring } from '@react-spring/web'
 import usePrevious from '../util/usePrevious';
 const isNumber = function (str: string) {

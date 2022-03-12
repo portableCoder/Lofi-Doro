@@ -9,7 +9,7 @@ const _404Page = () => {
 
             <div className='text-5xl flex flex-col gap-y-4 text-white'>
                 <div className='text-center underline underline-offset-4  '>404</div>
-                <div className='flex gap-x-2 text-base md:text-xl'>Couldn't find that! <Link href='/'>
+                <div className='flex gap-x-2 text-base md:text-xl'>{`Couldn't find that!`} <Link href='/'>
 
                     <a className='text-blue-500 hover:underline'>Click To Go Back To Home</a>
 
