@@ -3,11 +3,10 @@ import Head from 'next/head'
 export default function SEOHead() {
     return <Head>
         <title>Lofi Doro </title>
-        <meta name="og:title" content="Lofi Doro" />
-
-        <meta name="og:description" content="A pomodoro timer to study/relax to" />
+        <meta property="og:title" content="Lofi Doro" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/portableCoder/Lofi-Doro/master/assets/logo.png" />
+        <meta property="og:description" content="A pomodoro timer to study/relax to" />
         <meta name="description" content="A pomodoro timer to study/relax to" />
-        <meta name="og:image" content="https://raw.githubusercontent.com/portableCoder/Lofi-Doro/master/assets/logo.png" />
 
         <link rel="shortcut icon" href="/Lofi-Doro/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/Lofi-Doro/apple-touch-icon.png" />
