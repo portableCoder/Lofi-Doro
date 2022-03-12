@@ -23,7 +23,7 @@ You can then run the tests with
 
 ```bash 
 yarn test
-yarn cy:open 
+yarn cypress:open 
 ```
 A static file is built with next's static site generation:
 ```bash
