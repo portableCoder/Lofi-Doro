@@ -11,7 +11,7 @@ import parseYoutubeLink from '../util/parseYoutubeLink'
 import useTimer from '../hooks/useTimer'
 const Home: NextPage = () => {
   const { width, height } = useWindowSize()
-  const { timerState, link, setLink, resetTimer, setTimerDuration, setPlay, setPaused } = useTimer()
+  const { timerState, link, setLink, resetTimer, setTimerDuration, setPlay, setPaused, setBreakduration } = useTimer()
 
   const player = useRef<any>(null)
 
@@ -117,7 +117,7 @@ const Home: NextPage = () => {
                 setTimerDuration(time)
               }} onBreakChange={(e) => {
 
-                setTimerDuration(Number(e.target.value))
+                setBreakduration(Number(e.target.value) * 60)
 
               }} onClickStop={resetTimer} onClickPlay={() => {
                 if (!timerState.paused === false && player.current) {
