@@ -22,20 +22,15 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
         sec: ts
     })
 
-    const filterUnwantedChars = (e: React.FormEvent<HTMLInputElement>) => {
-
-        let currentVal = e.currentTarget.value
-        if (!isNumber(currentVal)) {
-            currentVal = '0'
+    const insertMinValue = (e: React.ChangeEvent<HTMLInputElement>, min: string) => {
+        if (e.target.value == '') {
+            e.target.value = min
+            e.target.select()
         }
-        if (Number(currentVal) > 9) {
-            currentVal = currentVal.replaceAll("0", '')
+        else if (Number(e.target.value) < Number(min)) {
+            e.target.value = min
         }
-        e.currentTarget.value = currentVal
-
     }
-
-
     useEffect(() => {
         if (onTimerChange) {
 
@@ -60,9 +55,8 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                 <div className=''>Break Duration:</div>
 
                 <div className='w-12  '>
-                    <input disabled={!paused} onChange={(e) => {
-                        filterUnwantedChars(e)
-
+                    <input min='1' type='number' disabled={!paused} onChange={(e) => {
+                        insertMinValue(e, e.target.min)
                         if (onBreakChange)
                             onBreakChange(e)
                     }} defaultValue={String(Math.floor(breakDuration / 60)).padStart(2, '0')} className='w-full text-center bg-transparent focus:outline-none' />
@@ -94,16 +88,9 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                             {hr}
                         </div>}
                         {!play &&
-                            <input id="hr" onChange={(e) => {
+                            <input min='0' type='number' id="hr" onChange={(e) => {
+                                insertMinValue(e, e.target.min)
                                 let val = e.target.value
-                                if (val === '') {
-                                    setTimerDurationTime((prev) => ({ ...prev, hrs: val }))
-                                    return
-                                }
-                                else if (!val || !isNumber(val)) {
-                                    val = "0"
-                                }
-
                                 setTimerDurationTime((prev) => ({ ...prev, hrs: val }))
                             }} value={timerDurationTime.hrs} className='w-16 ring-2 ring-neutral-800 focus:ring-red-500  text-center bg-transparent focus:outline-none' />
                         }
@@ -118,17 +105,9 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                         </div>}
                         {!play &&
 
-                            <input id="min" onChange={(e) => {
+                            <input min='1' id="min" type='number' onChange={(e) => {
+                                insertMinValue(e, e.target.min)
                                 let val = e.target.value
-                                if (val === '') {
-                                    setTimerDurationTime((prev) => ({ ...prev, mins: val }))
-                                    return
-                                }
-                                else if (!val || !isNumber(val)) {
-                                    val = "0"
-
-                                }
-
                                 setTimerDurationTime((prev) => ({ ...prev, mins: val }))
                             }} value={timerDurationTime.mins} className='w-16 ring-2 ring-neutral-800 focus:ring-red-500  text-center bg-transparent focus:outline-none' />
                         }
@@ -143,15 +122,10 @@ const Timer = ({ isBreak, paused, time, breakDuration, play, timerDuration, onCl
                         </div>}
                         {
                             !play &&
-                            <input id="sec" onChange={(e) => {
+                            <input min='0' type='number' id="sec" onChange={(e) => {
+                                insertMinValue(e, e.target.min)
                                 let val = e.target.value
-                                if (val === '') {
-                                    setTimerDurationTime((prev) => ({ ...prev, sec: val }))
-                                    return
-                                }
-                                else if (!val || !isNumber(val)) {
-                                    val = "0"
-                                }
+
 
                                 setTimerDurationTime((prev) => ({ ...prev, sec: val }))
                             }} value={timerDurationTime.sec} className='w-16 ring-2 ring-neutral-800 focus:ring-red-500 bg-transparent focus:outline-none text-center' />

@@ -14,7 +14,7 @@
     "cypress:open": "cypress open",
     "export": "next build && next export",
     "predeploy": "yarn export",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages -d out -t true"
   },
   "husky": {
     "hooks": {

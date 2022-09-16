@@ -24,6 +24,7 @@ const Home: NextPage = () => {
         player.current.target.pauseVideo()
 
       } else if (!timerState.isBreak && !timerState.paused && timerState.play) {
+
         player.current.target.playVideo()
 
       }
